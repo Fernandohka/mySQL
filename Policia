@@ -1,0 +1,35 @@
+create database Policia;
+use Policia;
+
+create table Soldado(
+	IDSoldado int not null primary key auto_increment,
+    RM int not null,
+    Nome Varchar(255) not null,
+    DataNascimento date not null
+);
+
+create table Municao(
+	IDMunicao int not null primary key auto_increment,
+    Calibre Varchar(10)
+);
+
+create table Arma(
+	IDArma int not null primary key auto_increment,
+    IDMunicao int not null,
+    IDSoldado int not null,
+    NumeroSerie varchar(30) not null,
+    Tipo varchar(50) not null,
+    Calibre varchar(10),
+    foreign key (IDMunicao) references Municao(IDMunicao),
+    foreign key (IDSoldado) references Soldado(IDSoldado)
+);
+
+create table Limpeza(
+	IDLimpeza int not null primary key auto_increment,
+    IDArma int not null,
+    IDSoldado int not null,
+    foreign key (IDSoldado) references Soldado(IDSoldado),
+    foreign key (IDArma) references Arma(IDArma)
+);
+
+show tables;
