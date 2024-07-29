@@ -1,0 +1,46 @@
+create database Floricultura;
+use Floricultura;
+
+create table Cliente(
+	IDCliente int not null primary key auto_increment,
+    CPF Varchar(15) not null,
+    Nome Varchar(255) not null,
+    Telefone Varchar(15)
+);
+
+create table Produto(
+	IDProduto int not null primary key auto_increment,
+    Tipo Varchar(255) not null,
+    Nome Varchar(255) not null,
+    Preco float not null,
+    QtdEstoque int not null
+);
+
+create table Funcionario(
+	IDFuncionario int not null primary key auto_increment,
+    Salario float,
+    Nome Varchar(255) not null,
+    DataNascimento date not null,
+    Telefone Varchar(15)
+);
+
+create table Compra(
+	IDCompra int not null primary key auto_increment,
+    IDCliente int not null,
+    IDFuncionario int not null,
+    DataCompra datetime not null,
+    ValorTotal float,
+    foreign key (IDCliente) references Cliente(IDCliente),
+    foreign key (IDFuncionario) references Funcionario(IDFuncionario)
+);
+
+create table CompraProduto(
+	IDCompraProduto int not null primary key auto_increment,
+    IDCompra int not null,
+    IDProduto int not null,
+    QtdCompra int not null,
+    foreign key (IDCompra) references Compra(IDCompra),
+    foreign key (IDProduto) references Produto(IDProduto)
+);
+
+show tables;
