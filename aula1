@@ -1,0 +1,24 @@
+create database db_senai;
+use db_senai;
+show databases;
+
+drop table Professor;
+create table aluno(
+	IDAluno int not null primary key auto_increment,
+    Nome VARCHAR(255) NOT NULL,
+    Sobrenome Varchar(60) not null
+) default charset utf8;
+
+create table Professor(
+	IDProfessor int not null primary key auto_increment,
+    Nome VARCHAR(255) NOT NULL,
+    Sobrenome Varchar(60) not null
+)  default charset utf8;
+
+create table turma(
+	IDTurma int not null primary key auto_increment,
+    IDAluno int,
+    IDProfessor int,
+	foreign key (IDAluno) references Aluno(IDAluno),
+    foreign key (IDProfessor) references Professor(IDProfessor)
+)
