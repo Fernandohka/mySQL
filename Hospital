@@ -1,0 +1,10 @@
+create database Hospital;
+
+use Hospital;
+
+create table Paciente(
+	IDPaciente int not null primary key auto_increment,
+    Endereco Varchar(255) not null,
+    Nome Varchar(255) not null,
+    Telefone Varchar(15)
+);
