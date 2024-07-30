@@ -1,0 +1,36 @@
+create database Academia;
+
+use Academia;
+
+create table Professor(
+	IDProfessor int not null primary key auto_increment,
+    Nome Varchar(255) not null,
+    Sobrenome Varchar(255) not null,
+    Telefone Varchar(15) not null
+);
+
+create table Aula(
+	IDAula int not null primary key auto_increment,
+    Modalidade varchar(255) not null,
+	Dificuldade varchar(255) not null,
+    Sala varchar(255) not null,
+    IDProfessor int not null,
+    foreign key (IDProfessor) references Professor(IDProfessor)
+);
+
+create table Cliente(
+	IDCliente int not null primary key auto_increment,
+    Nome Varchar(255) not null,
+    Idade int not null,
+    Sexo char(1) not null,
+    Instituicao Varchar(255) not null,
+    Telefone Varchar(15) not null
+);
+
+create table AulaCliente(
+	IDAulaCliente int not null primary key auto_increment,
+    IDAula int not null,
+    IDCliente int not null,
+    foreign key (IDAula) references IDAula(IDAula),
+    foreign key (IDCliente) references IDCliente(IDCliente)
+);
