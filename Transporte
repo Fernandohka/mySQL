@@ -1,0 +1,59 @@
+create database Transporte;
+
+use Transporte;
+
+create table Armazem(
+	IDArmazem int not null primary key auto_increment,
+    Endereco Varchar(255) not null
+);
+
+create table Loja(
+	IDLoja int not null primary key auto_increment,
+    Endereco Varchar(255) not null
+);
+
+create table ArmazemLoja(
+	IDArmazemLoja int not null primary key auto_increment,
+    IDArmazem int not null,
+    IDLoja int not null,
+    foreign key (IDLoja) references Loja(IDLoja),
+    foreign key (IDArmazem) references Armazem(IDArmazem)
+);
+
+create table Encomenda(
+	IDEncomenda int not null primary key auto_increment,
+    IDLoja int not null,
+    foreign key (IDLoja) references Loja(IDLoja)
+);
+
+create table Caminhao(
+	IDCaminhao int not null primary key auto_increment,
+    Capacidade int not null,
+    NomeMotorista Varchar(255) not null
+);
+
+create table Viagem(
+	IDViagem int not null primary key auto_increment,
+    IDEncomenda int not null,
+    IDCaminhao int not null,
+    foreign key (IDEncomenda) references Encomenda(IDEncomenda),
+    foreign key (IDCaminhao) references Caminhao(IDCaminhao),
+    Destino Varchar(255) not null
+);
+
+create table Produto(
+	IDProduto int not null primary key auto_increment,
+    Nome Varchar(255) not null,
+    Descricao Varchar(255) not null,
+    Preco Float not null
+);
+
+create table EncomendaProduto(
+	IDEncomendaProduto int not null primary key auto_increment,
+    IDEncomenda int not null,
+    IDProduto int not null,
+    Qtd int not null,
+    ValorTotal float not null,
+    foreign key (IDEncomenda) references Encomenda(IDEncomenda),
+    foreign key (IDProduto) references Produto(IDProduto)
+);
