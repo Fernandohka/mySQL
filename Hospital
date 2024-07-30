@@ -6,5 +6,44 @@ create table Paciente(
 	IDPaciente int not null primary key auto_increment,
     Endereco Varchar(255) not null,
     Nome Varchar(255) not null,
-    Telefone Varchar(15)
+    DataNascimento Date,
+    CodigoDeRegistro int not null
+);
+
+create table Exame(
+	IDExame int not null primary key auto_increment,
+    Nome Varchar(255),
+    Resultado varchar(255),
+    Descrição varchar(255)
+);
+
+create table Medico(
+	IDMedico int not null primary key auto_increment,
+    CRM Varchar(20) not null,
+    Nome Varchar(255) not null,
+    Especialidade Varchar(255) not null
+);
+
+create table Consulta(
+	IDConsulta int not null primary key auto_increment,
+    IDMedico int not null,
+    IDPaciente int not null,
+    IDExame int not null,
+    foreign key (IDMedico) references Medico(IDMedico),
+    foreign key (IDPaciente) references Paciente(IDPaciente),
+    foreign key (IDExame) references Exame(IDExame)
+);
+
+create table Medicamento(
+	IDMedicamento int not null primary key auto_increment,
+    Nome Varchar(255) not null,
+    Descrição varchar(255)
+);
+
+create table ConsultaMedicamento(
+	IDConsultaMedicamento int not null primary key auto_increment,
+    IDMedicamento int not null,
+    IDConsulta int not null,
+    foreign key (IDMedicamento) references Medicamento(IDMedicamento),
+    foreign key (IDConsulta) references Consulta(IDConsulta)
 );
