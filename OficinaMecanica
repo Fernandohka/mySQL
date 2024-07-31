@@ -1,0 +1,49 @@
+create database OficinaMecanica;
+
+use OficinaMecanica;
+
+create table Cliente(
+	IDCliente int not null primary key auto_increment,
+    Nome Varchar(255) not null,
+    Telefone Varchar(15) not null,
+    Endereco Varchar(255) not null
+) default charset utf8mb4;
+
+create table Carro(
+	IDCarro int not null primary key auto_increment,
+    IDCliente int not null,
+    Marca Varchar(255) not null,
+    Modelo Varchar(255) not null,
+    Ano int not null,
+    Placa Varchar(20),
+    Tipo Varchar(255),
+    foreign key (IDCliente) references Cliente(IDCliente)
+) default charset utf8mb4;
+
+create table OrdemServico(
+	IDOrdemServico int not null primary key auto_increment,
+    IDCliente int not null,
+    IDCarro int not null,
+    DataEntrada date not null,
+    DataConclusao date,
+    Status Varchar(15) not null,
+    Observacoes Varchar(255) not null,
+    PrecoTotal float not null,
+    foreign key (IDCliente) references Cliente(IDCliente),
+    foreign key (IDCarro) references Carro(IDCarro)
+) default charset utf8mb4;
+
+create table Servico(
+	IDServico int not null primary key auto_increment,
+    Descricao Varchar(255) not null,
+    Preco float not null
+) default charset utf8mb4;
+
+create table OrdemServicoServico(
+	IDOrdemServicoServico int not null primary key auto_increment,
+    IDServico int not null,
+    IDOrdemServico int not null,
+    QtdServico int not null,
+    foreign key (IDServico) references Servico(IDServico),
+    foreign key (IDOrdemServico) references OrdemServico(IDOrdemServico)
+) default charset utf8mb4;
